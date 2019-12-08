@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: demo city temperature using mongodb atlas for storage
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    PermissionsBoundary:
+      Fn::Sub: arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary
+Parameters:
+  AppId:
+    Type: String
+Resources:
+  MyQueue:
+    Type: AWS::SQS::Queue
+  helloFromLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: helloFromLambdaFunction
+      Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+    DeadLetterQueue:
+      Type: SQS
+      TargetArn:
+        Fn::GetAtt:
+        - MyQueue
+        - Arn
+    Description: A Lambda function that returns a static string.
+    Policies:
+    - SQSSendMessagePolicy:
+        QueueName:
+          Fn::GetAtt:
+          - MyQueue
+          - QueueName
+    - AWSLambdaBasicExecutionRole
