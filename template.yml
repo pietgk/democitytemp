@@ -44,3 +44,6 @@ Resources:
       Policies:
         # Give Lambda basic execution Permission to the helloFromLambda
         - AWSLambdaBasicExecutionRole
+
+  MyQueue:
+    Type: AWS::SQS::Queue
