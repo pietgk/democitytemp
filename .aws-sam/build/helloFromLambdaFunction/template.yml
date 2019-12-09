@@ -51,3 +51,22 @@ Resources:
             QueueName: !GetAtt MyQueue.QueueName
         # Give Lambda basic execution Permission to the helloFromLambda
         - AWSLambdaBasicExecutionRole
+
+  # This is a Lambda function config associated with the source code: hello-from-lambda.js
+  hello2FromLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/hello2-from-lambda.hello2FromLambdaHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+    DeadLetterQueue:
+        Type: SQS
+        TargetArn: !GetAtt MyQueue.Arn
+    Description: A Lambda function 2 that returns a static string.
+    Policies:
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt MyQueue.QueueName
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
