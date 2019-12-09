@@ -33,7 +33,6 @@ Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
-  # This is a Lambda function config associated with the source code: hello-from-lambda.js
   helloFromLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -52,7 +51,6 @@ Resources:
         # Give Lambda basic execution Permission to the helloFromLambda
         - AWSLambdaBasicExecutionRole
 
-  # This is a Lambda function config associated with the source code: hello-from-lambda.js
   hello2FromLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -70,3 +68,51 @@ Resources:
             QueueName: !GetAtt MyQueue.QueueName
         # Give Lambda basic execution Permission to the helloFromLambda
         - AWSLambdaBasicExecutionRole
+
+  putEventFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/put-event.putEventHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A simple example includes a HTTP post method to add one event to a MongoDb Atlas collection.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+
+  currenttempincovilha:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/currenttempincovilha.getEventHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A simple example includes a HTTP post method to get event currenttempincovilha from the stage_events MongoDb Atlas collection.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /currenttempincovilha
+            Method: GET
+
+  avgtempinsfax:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/avgtempinsfax.getEventHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A simple example includes a HTTP post method to get event avgtempinsfax from the stage_events MongoDb Atlas collection.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /avgtempinsfax
+            Method: GET
