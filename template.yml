@@ -77,7 +77,7 @@ Resources:
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
-      Description: A simple example includes a HTTP post method to add one event to a MongoDb Atlas collection.
+      Description: add one event to the MongoDb Atlas {stage}_events collection.
       Events:
         Api:
           Type: Api
@@ -93,7 +93,7 @@ Resources:
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
-      Description: A simple example includes a HTTP post method to get event currenttempincovilha from the stage_events MongoDb Atlas collection.
+      Description: get event currenttempincovilha from the {stage}_events MongoDb Atlas collection.
       Events:
         Api:
           Type: Api
@@ -109,10 +109,26 @@ Resources:
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
-      Description: A simple example includes a HTTP post method to get event avgtempinsfax from the stage_events MongoDb Atlas collection.
+      Description: get event avgtempinsfax from the {stage}_events MongoDb Atlas collection..
       Events:
         Api:
           Type: Api
           Properties:
             Path: /avgtempinsfax
+            Method: GET
+
+  refresh:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/refresh.refreshHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+      Description: refresh the needed stage_events MongoDb Atlas collection city temperatures.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /refresh
             Method: GET
