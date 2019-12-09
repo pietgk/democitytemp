@@ -3,6 +3,8 @@ const { insertMockEvent } = require('../../../src/storage/storage-insert-mock-ev
 const stage = 'test';
 const httpMethod = 'GET';
 
+jest.setTimeout(20000); // 20 second timeout
+
 describe('avgtempinsfax', () => {
     it('should fetch the avgtempinsfax from the database events collection', async () => {
         const _id = 'avgtempinsfax';

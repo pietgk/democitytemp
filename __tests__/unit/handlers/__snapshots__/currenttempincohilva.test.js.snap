@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`currenttempincovilha should fetch the currenttempincovilha from the database events collection 1`] = `
+Object {
+  "body": "{\\"_id\\":\\"currenttempincovilha\\",\\"city\\":\\"covilha\\",\\"temperature\\":\\"15\\",\\"unit\\":\\"C\\"}",
+  "statusCode": 200,
+}
+`;
