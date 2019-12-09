@@ -1,4 +1,17 @@
-# Start from scratch starter project
+# AWS Start from scratch starter project
+
+Please note this is WIP
+ - API-Gateway only on hello world
+ - SecretManager access right issue during integration test runs during build
+ - only happy path is tested
+ - sfax average temps need to be fetched from openWeatherApi
+ 
+ See the lambdas that fetch temps of 2 fixed cities (sfax and cohilva) from the database.
+ See Refresh lambda with the fetch from openWeather api and store it in the database.
+ 
+ Because of lack of time this project will be improved at a later date.
+ 
+# Below remaining original starter project readme. 
 
 This project contains source code and supporting files for the serverless application that you created in the AWS Lambda console. You can update your application at any time by committing and pushing changes to your AWS CodeCommit or GitHub repository.
 
