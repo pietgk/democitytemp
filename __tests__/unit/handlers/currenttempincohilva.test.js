@@ -8,14 +8,16 @@ jest.setTimeout(20000); // 20 second timeout
 // and this as integration test.
 // currently i like testing the same as prod.
 
+// TODO test errors
 describe('currenttempincovilha', () => {
     it('should fetch the currenttempincovilha from the database events collection', async () => {
-        const _id = 'currenttempincovilha';
+        const _id = 'currenttempincovilha.lambda.test';
         const mockEvent = { _id, city: 'covilha', temperature: '15', unit: 'C' };
         const mockInsertResult = await insertMockEvent({ stage, ...mockEvent });
         const event = {
             httpMethod,
-            stage
+            stage,
+            _id
         };
         const responce = await lambda.getEventHandler(event);
  

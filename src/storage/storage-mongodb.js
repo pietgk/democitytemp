@@ -63,6 +63,24 @@ exports.insertOne = (events, event) => {
     });
 };
 
+exports.replaceOne = (events, event) => {
+    return new Promise((resolve, reject) => {
+        const _id = event._id;
+        events.replaceOne({ _id }, event, { upsert: true }, function (err, r) {
+            if (err != null) {
+                reject(err);
+            } else {
+                const { modifiedCount, matchedCount } = r;
+                resolve({
+                    modifiedCount,
+                    matchedCount,
+                    event
+                });
+            }
+        });
+    });
+};
+
 exports.StorageClose = async ({ dbClient }) => {
     // db && await db.close();
     dbClient && (await dbClient.close());

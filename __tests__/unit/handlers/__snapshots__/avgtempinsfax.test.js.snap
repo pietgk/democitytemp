@@ -2,7 +2,7 @@
 
 exports[`avgtempinsfax should fetch the avgtempinsfax from the database events collection 1`] = `
 Object {
-  "body": "{\\"_id\\":\\"avgtempinsfax\\",\\"city\\":\\"sfax\\",\\"temperature\\":\\"12\\",\\"unit\\":\\"C\\"}",
+  "body": "{\\"_id\\":\\"avgtempinsfax.lambda.test\\",\\"city\\":\\"sfax\\",\\"temperature\\":\\"12\\",\\"unit\\":\\"C\\"}",
   "statusCode": 200,
 }
 `;

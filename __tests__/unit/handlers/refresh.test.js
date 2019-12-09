@@ -20,12 +20,12 @@ describe('refresh', () => {
     });
 
     it('should update the database collection with the temperatures', async () => {
-        const events = storage.collection;
         const event = {
             stage,
             httpMethod: 'GET'
         };
 
+        // const events = storage.collection;
         // await cleanOne(events, _id);
         const responce = await lambda.refreshHandler(event);
 

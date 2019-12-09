@@ -1,4 +1,4 @@
-const { EventStorage, StorageClose, insertOne } = require('../storage/storage-mongodb');
+const { EventStorage, StorageClose, replaceOne } = require('../storage/storage-mongodb');
 
 exports.putEvent = async (stage, event) => {
     let response;
@@ -6,7 +6,7 @@ exports.putEvent = async (stage, event) => {
     try {
         storage = await EventStorage(stage)();
         const events = storage.collection;
-        let result = await insertOne(events, event);
+        let result = await replaceOne(events, event);
         response = {
             statusCode: 200,
             ...result

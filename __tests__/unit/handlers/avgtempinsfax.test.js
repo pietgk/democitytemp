@@ -7,13 +7,14 @@ jest.setTimeout(20000); // 20 second timeout
 
 describe('avgtempinsfax', () => {
     it('should fetch the avgtempinsfax from the database events collection', async () => {
-        const _id = 'avgtempinsfax';
+        const _id = 'avgtempinsfax.lambda.test';
         const mockEvent = { _id, city: 'sfax', temperature: '12', unit: 'C' };
         const mockInsertResult = await insertMockEvent({ stage, ...mockEvent });
 
         const event = {
             httpMethod,
-            stage
+            stage,
+            _id
         };
         const responce = await lambda.getEventHandler(event);
 

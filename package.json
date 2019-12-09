@@ -12,6 +12,6 @@
         "jest": "^24.7.1"
     },
     "scripts": {
-        "test": "jest --detectOpenHandles"
+        "test": "jest"
     }
 }
