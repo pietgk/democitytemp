@@ -19,7 +19,7 @@ exports.storageGetEvent = async event => {
     } catch (exception) {
         response = {
             statusCode: 500,
-            exception
+            body: exception
         };
     }
     await StorageClose(storage);
