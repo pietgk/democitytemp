@@ -14,7 +14,7 @@ describe('Test for hello-from-lambda', () => {
                 you should change the following line to `const expectedResult = 'Hello World!';`
         */
         const expectedResult = {
-            statusCode: 200, body: 'Hello 2b from Lambda!'
+            statusCode: 200, body: 'Hello 2c from Lambda!'
         };
 
         // Compare the result with the expected result
