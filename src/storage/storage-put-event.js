@@ -1,4 +1,5 @@
 const { EventStorage, StorageClose, replaceOne } = require('../storage/storage-mongodb');
+const { ResponceOk, ResponceError } = require('../lib/api-gateway');
 
 exports.putEvent = async (stage, event) => {
     let response;
@@ -7,15 +8,9 @@ exports.putEvent = async (stage, event) => {
         storage = await EventStorage(stage)();
         const events = storage.collection;
         let result = await replaceOne(events, event);
-        response = {
-            statusCode: 200,
-            ...result
-        };
+        response = ResponceOk(result);
     } catch (exception) {
-        response = {
-            statusCode: 500,
-            exception
-        };
+        return ResponceError(exception);
     }
     await StorageClose(storage);
     return response;

@@ -8,11 +8,11 @@ exports.StorageClient = ({ databaseName, collectionName, stage = 'prod' }) => {
         }
         const secrets = await demoSecrets;
         const dbUri = secrets['events-db-url']; // 'mongodb+srv://<username>:<password>@cluster0-egx8l.mongodb.net/test?retryWrites=true&w=majority';
-        const mogeClient = await MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-        const db = mogeClient.db(`${stage}_${databaseName}`);
+        const dbClient = await MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const db = dbClient.db(`${stage}_${databaseName}`);
         const collection = db.collection(collectionName); // TODO should use strict and callback
 
-        return { mogeClient, db, collection };
+        return { dbClient, db, collection };
     };
 };
 

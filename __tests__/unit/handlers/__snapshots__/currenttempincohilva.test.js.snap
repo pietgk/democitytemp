@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`currenttempincovilha should fetch the currenttempincovilha from the database events collection 1`] = `
+Object {
+  "body": "{\\"_id\\":\\"currenttempincovilha.lambda.test\\",\\"city\\":\\"covilha\\",\\"temperature\\":\\"15\\",\\"unit\\":\\"C\\"}",
+  "isBase64Encoded": false,
+  "statusCode": 200,
+}
+`;
