@@ -42,7 +42,9 @@ exports.getCurrentTemperaturInCohilva = async () => {
 
             const url = "http://api.openweathermap.org/data/2.5/weather?q=covilha&APPID=76f704a8bd49cc78a36ab28d9aedac2c";
 
+            console.log('getCurrentTemperaturInCohilva url:', url);
             const responce = await axios.get(url);
+            console.log('getCurrentTemperaturInCohilva response:', responce);
             const { name: city, main: { temp: temperature } } = responce.data;
             const unit = "F";
             console.log('getCurrentTemperaturInCohilva responce:', { city, temperature, unit });
@@ -53,7 +55,7 @@ exports.getCurrentTemperaturInCohilva = async () => {
             // const city = "Covilha";
             // resolve({ city, temperature, unit, observationTime });
         } catch (e) {
-            console.log('getCurrentTemperaturInCohilva reject:', e);
+            console.log('getCurrentTemperaturInCohilva reject:', e.message);
             reject(e);
         }
         /* responce: {

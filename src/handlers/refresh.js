@@ -8,11 +8,11 @@ exports.refreshHandler = async event => {
         const _id = 'currenttempincovilha'; // TODO add sfax in the loop
         const { stage } = event;
         console.log('stage:', stage);
-        let results = [];
         const data = await getCurrentTemperaturInCohilva();
+        console.log('data:', data);
         const result = await putEvent(stage, { _id, ...data });
-        results.push(result);
-        return ResponceOk(results);
+        console.log('result:', result);
+        return ResponceOk('Ok');
     } catch (e) {
         throw new Error(`refreshHandler exception: ${JSON.stringify(e)}`);
     }
