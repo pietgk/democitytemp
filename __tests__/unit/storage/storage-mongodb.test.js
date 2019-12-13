@@ -9,7 +9,7 @@ describe('MongoDb', () => {
 
     beforeAll(async () => {
         try {
-            storage = await EventStorage(stage)();
+            storage = await EventStorage(stage);
         } catch (e) {
             console.log('Test putEventHandler beforeAll exception', e)
         }
@@ -19,18 +19,17 @@ describe('MongoDb', () => {
         await StorageClose(storage);
     });
 
-    it('should insert an event as doc into collection', async () => {
-        const events = storage.collection;
+    it('should insert an event as doc into the events collection', async () => {
         const _id = 'moon-event-id';
 
-        await cleanOne(events, _id);
+        await cleanOne(storage.events, _id);
 
         const mockEvent = { _id, city: 'paris', temperature: '11', unit: 'C' };
-        await insertOne(events, mockEvent);
+        await insertOne(storage.events, mockEvent);
 
-        const insertedEvent = await findOne(events, { _id });
+        const insertedEvent = await findOne(storage.events, { _id });
         expect(insertedEvent).toEqual(mockEvent);
-        await cleanOne(events, _id);
+        await cleanOne(storage.events, _id);
     });
 });
 

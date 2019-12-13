@@ -9,7 +9,7 @@ describe('refresh', () => {
 
     beforeAll(async () => {
         try {
-            storage = await EventStorage(stage)();
+            storage = await EventStorage(stage);
         } catch (e) {
             console.log('Test putEventHandler beforeAll exception', e);
         }
@@ -19,13 +19,13 @@ describe('refresh', () => {
         await StorageClose(storage);
     });
 
-    it('should update the database collection with the temperatures', async () => {
+    it('should update the database events collection with the temperatures', async () => {
         const event = {
             stage,
             httpMethod: 'GET'
         };
 
-        // const events = storage.collection;
+        // const events = storage.events;
         // await cleanOne(events, _id);
         const responce = await lambda.refreshHandler(event);
 

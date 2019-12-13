@@ -1,21 +1,6 @@
 const { MongoClient } = require('mongodb');
 const { demoSecrets } = require('../lib/secrets');
 
-exports.StorageClient = ({ databaseName, collectionName, stage = 'prod' }) => {
-    return async () => {
-        if (stage !== 'prod' && stage != 'acc' && stage !== 'test' && stage !== 'dev') {
-            stage = 'test';
-        }
-        const secrets = await demoSecrets;
-        const dbUri = secrets['events-db-url']; // 'mongodb+srv://<username>:<password>@cluster0-egx8l.mongodb.net/test?retryWrites=true&w=majority';
-        const dbClient = await MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-        const db = dbClient.db(`${stage}_${databaseName}`);
-        const collection = db.collection(collectionName); // TODO should use strict and callback
-
-        return { dbClient, db, collection };
-    };
-};
-
 exports.cleanOne = (events, _id) => {
     return new Promise((resolve, reject) => {
         events.findOneAndDelete({ _id }, function(err, r) {
@@ -86,6 +71,28 @@ exports.StorageClose = async ({ dbClient }) => {
     dbClient && (await dbClient.close());
 };
 
-const databaseName = 'events';
-const collectionName = 'events';
-exports.EventStorage = (stage = 'prod') => exports.StorageClient({ stage, databaseName, collectionName });
+exports.StorageClient = ({ databaseName, collectionName, stage = 'prod' }) => {
+    return async () => {
+        if (stage !== 'prod' && stage != 'acc' && stage !== 'test' && stage !== 'dev') {
+            stage = 'test';
+        }
+        try {
+            const secrets = await demoSecrets;
+            const dbUri = secrets['events-db-url']; // 'mongodb+srv://<username>:<password>@cluster0-egx8l.mongodb.net/test?retryWrites=true&w=majority';
+            const dbClient = await MongoClient.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+            const db = dbClient.db(`${stage}_${databaseName}`);
+            const collection = db.collection(collectionName); // TODO should use strict and callback
+            return { dbClient, db, collection };
+        } catch (err) {
+            return { err }
+        }
+    };
+};
+
+
+exports.EventStorage = async (stage = 'prod') => {
+    const databaseName = 'events';
+    const collectionName = 'events';
+    const { dbClient, db, collection: events, err } = await exports.StorageClient({ stage, databaseName, collectionName })();
+    return { dbClient, db, events, err };
+}

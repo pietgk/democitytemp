@@ -10,15 +10,15 @@ exports.ResponceOk = (result) => ({
     body: JSON.stringify(result)
 });
 
-/* lambda API-Gateway standard error spec {
-  "errorMessage": "Malformed input ...",
-  "errorType": "Error",
-  "stackTrace": [
-    "exports.handler (/var/task/index.js:3:14)"
-  ]
-}*/
-exports.ResponceError = (exception) => ({
-    "errorMessage": exception.message,
-    "errorType": "Error",
-    "stackTrace": exception.stackTrace
-});
+// /* lambda API-Gateway standard error spec {
+//   "errorMessage": "Malformed input ...",
+//   "errorType": "Error",
+//   "stackTrace": [
+//     "exports.handler (/var/task/index.js:3:14)"
+//   ]
+// }*/
+// exports.ResponceError = (err) => ({
+//     "errorMessage": err.message,
+//     "errorType": "Error",
+//     "stackTrace": JSON.stringify(err)
+// });

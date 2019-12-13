@@ -1,17 +1,9 @@
 const { EventStorage, StorageClose, replaceOne } = require('../storage/storage-mongodb');
-const { ResponceOk, ResponceError } = require('../lib/api-gateway');
+const { ResponceOk } = require('../lib/api-gateway');
 
 exports.putEvent = async (stage, event) => {
-    let response;
-    let storage;
-    try {
-        storage = await EventStorage(stage)();
-        const events = storage.collection;
-        let result = await replaceOne(events, event);
-        response = ResponceOk(result);
-    } catch (exception) {
-        return ResponceError(exception);
-    }
+    const storage = await EventStorage(stage);
+    const result = await replaceOne(storage.events, event);
     await StorageClose(storage);
-    return response;
+    return ResponceOk(result);
 };

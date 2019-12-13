@@ -9,7 +9,7 @@ describe('putEventHandler', () => {
 
     beforeAll(async () => {
         try {
-            storage = await EventStorage(stage)();
+            storage = await EventStorage(stage);
         } catch (e) {
             console.log('Test putEventHandler beforeAll exception', e);
         }
@@ -19,8 +19,7 @@ describe('putEventHandler', () => {
         await StorageClose(storage);
     });
 
-    it('should add event to the database collection', async () => {
-        const events = storage.collection;
+    it('should add event to the database events collection', async () => {
         const _id = 'amsterdam-event-id';
         const body = `{"_id": "${_id}","city":"amsterdam","temperature":"5", "unit": "C"}`;
         const event = {

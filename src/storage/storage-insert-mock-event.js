@@ -5,10 +5,9 @@ const { EventStorage, StorageClose, cleanOne, insertOne } = require('./storage-m
  */
 exports.insertMockEvent = async event => {
     const { stage, ...mockEvent } = event;
-    const storage = await EventStorage(stage)();
-    const events = storage.collection;
-    await cleanOne(events, mockEvent._id);
-    const result = await insertOne(events, mockEvent);
+    const storage = await EventStorage(stage);
+    await cleanOne(storage.events, mockEvent._id);
+    const result = await insertOne(storage.events, mockEvent);
     await StorageClose(storage);
     return result;
 };
