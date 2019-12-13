@@ -4,11 +4,15 @@
   "headers": { ... },
   "body": "JSON string"
 }*/
-exports.ResponceOk = (result) => ({
-    isBase64Encoded: false,
-    statusCode: 200,
-    body: JSON.stringify(result)
-});
+exports.ResponceOk = (result) => {
+    const responce = {
+        isBase64Encoded: false,
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+    console.log('ResponceOk:', responce);
+    return responce;
+};
 
 // /* lambda API-Gateway standard error spec {
 //   "errorMessage": "Malformed input ...",

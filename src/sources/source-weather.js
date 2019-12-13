@@ -45,6 +45,7 @@ exports.getCurrentTemperaturInCohilva = async () => {
             const responce = await axios.get(url);
             const { name: city, main: { temp: temperature } } = responce.data;
             const unit = "F";
+            console.log('getCurrentTemperaturInCohilva responce:', { city, temperature, unit });
             resolve({ city, temperature, unit });
 
             // const responce = await axios.get(url);
@@ -52,6 +53,7 @@ exports.getCurrentTemperaturInCohilva = async () => {
             // const city = "Covilha";
             // resolve({ city, temperature, unit, observationTime });
         } catch (e) {
+            console.log('getCurrentTemperaturInCohilva reject:', e);
             reject(e);
         }
         /* responce: {
