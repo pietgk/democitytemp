@@ -8,7 +8,7 @@
         "mongodb": "^3.3.5"
     },
     "devDependencies": {
-        "aws-sdk": "^2.437.0",
+        "aws-sdk": "^2.814.0",
         "jest": "^24.7.1"
     },
     "scripts": {
